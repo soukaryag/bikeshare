@@ -1,0 +1,231 @@
+<!-- This is the base and main file that displays the website and the map.
+     Also houses the script that runs all the dynamics on the map ------>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{{ url_for('static', filename='image/tabLogo.png') }}">
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ url_for('static', filename='css/style2.css') }}">
+
+    <title>{{pageName}}</title>
+
+    <script>
+
+            function openNavOne() {
+              document.getElementById("myNav").style.width = "25%";
+            }
+
+            function closeNavOne() {
+              document.getElementById("myNav").style.width = "0%";
+            }
+
+
+
+
+
+
+    </script>
+
+
+    <nav class='navbar'>
+        <ul id="myNav" class="overlay">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNavOne()">&times;</a>
+            <div class="overlay-content">
+                <a href="/">Home</a>
+                <a href="/stats">Statistics</a>
+                <a href="/graphs">Graphs</a>
+                <a href="https://github.com/soukaryag" target="_blank">Repo</a>
+                <a href="/aboutme">About Me</a>
+            </div>
+        </ul>
+
+        <ul class="left">
+            <li><a onclick="openNavOne()" style="font-size: 150%">&#9776;</a></li>
+        </ul>
+
+
+        <ul class="right">
+            <li><a href="https://github.com/soukaryag" target="_blank" style="font-size: 150%">github repo</a></li>
+        </ul>
+    </nav>
+
+</head>
+
+<!-- TELL THE BODY TO CALL THE SCRIPTED FUNCTION AND PASS IT TO INDEX.HTML -->
+<body>
+<title>
+    About Me
+</title>
+
+
+<!-- ADDING TEXT TO THE BODY AND ADDING THE ACTUAL FRAME OF THE MAP THAT WAS SCRIPTED IN LAYOUT.HTML -->
+<link rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/aboutme.css') }}">
+
+<div style="background-image: url('static/image/sunset.jpg');
+                    background-size: 120%;
+                    min-height: 500px;
+                    background-repeat: no-repeat;
+                    background-attachment: fixed;
+                    font: 70px 'Century Gothic';">
+    <a style="display: flex;
+                  align-items: center;
+                  color: white;
+                  justify-content: center;
+                  text-align: center;
+                  line-height: 500px;
+                    margin-left:10%;">About Me</a>
+
+</div>
+
+
+<img src="static/image/profPic.jpg" alt="Avatar" style="border-radius: 50%;
+    border: 100;
+    width: 20%;
+    height: 20%;
+    margin-left:7%;
+    margin-top:-9%">
+
+<div style="float:right; width:50%; height: 35%">
+    <text style="float:right; font-size: 90px; margin-right: 20px; padding: 0;">Soukarya Ghosh</text>
+    <text style="float:right; font-size: 25px; margin-right: 20px; padding: 0;">B.S. Computer Science | B.A.
+        Mathematics
+    </text>
+</div>
+
+<section class="introduction-section">
+    <h1 style="font-size:35px">About Me</h1>
+    <p>I am an undergraduate student at the University of Virginia pursuing a double major in Computer Science and
+        Mathematics, as well as a minor in Economics.</p>
+    <p style="margin-top:8px">I am originally from Jessore, Bangladesh. After moving to the States, I attended
+        elementary through high school
+        in Arlington, Virginia.</p>
+    <p style="margin-top:8px">I am passionate about learning and developing new systems and tools to give back to my
+        community. I enjoy both front-end and back-end development; mainly targeting tasks that lets my
+        creativity flourish.</p>
+</section>
+
+
+<br>
+<br>
+
+
+<div class="introduction-section" style="min-height:200px">
+
+    <h1 style="font-size:35px">Programming Experience</h1>
+
+    <div class="progress-circle over50 p92">
+        <span>Python</span>
+        <div class="left-half-clipper">
+            <div class="first50-bar"></div>
+            <div class="value-bar"></div>
+
+        </div>
+
+    </div>
+    <div class="progress-circle over50 p79">
+        <span>Java</span>
+        <div class="left-half-clipper">
+            <div class="first50-bar"></div>
+            <div class="value-bar"></div>
+        </div>
+    </div>
+    <div class="progress-circle over50 p73">
+        <span>JS</span>
+        <div class="left-half-clipper">
+            <div class="first50-bar"></div>
+            <div class="value-bar"></div>
+        </div>
+    </div>
+    <div class="progress-circle over50 p64">
+        <span>C++</span>
+        <div class="left-half-clipper">
+            <div class="first50-bar"></div>
+            <div class="value-bar"></div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+<section class="introduction-section">
+    <h1 style="font-size:35px">Citations</h1>
+    <p>Data:   <href href="https://bikeshare.metro.net/about/data/" style="color:grey">   https://bikeshare.metro.net/about/data/</href></p>
+    <br>
+    <p>Images: <href href="https://pxhere.com/" style="color:grey">    https://pxhere.com/</href></p>
+    <br>
+    <p>CSS additions: <href href="https://www.w3schools.com/" style="color:grey">   https://www.w3schools.com/</href></p>
+
+</section>
+
+
+</body>
+
+
+<footer class="footer-distributed">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div class="footer-left">
+
+        <h3>Bike Share<span>Data</span></h3>
+
+        <p class="footer-links">
+            <a href="/">Home</a>
+            ·
+            <a href="/stats">Statistics</a>
+            ·
+            <a href="/graphs">Graphs</a>
+            ·
+            <a href="/aboutme">About Me</a>
+
+        </p>
+
+        <p class="footer-company-name">Soukarya Ghosh | B.S. Computer Science · B.A. Mathematics</p>
+    </div>
+
+    <div class="footer-center">
+
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>University of Virginia</span> Charlottesville, Virginia</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+1 571-337-7193</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:sg4fz@virginia.edu">sg4fz@virginia.edu</a></p>
+        </div>
+
+    </div>
+
+    <div class="footer-right">
+
+        <p class="footer-company-about">
+            <span>About the project</span>
+            Aggregation of user data from the Los Angeles Metro bikeshare business. Using data techniques to
+            determine various correlations and statistics.
+        </p>
+
+        <div class="footer-icons">
+            <a href="https://www.facebook.com/soukarya.ghosh.3" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://twitter.com/soukarya_g" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/in/soukaryaghosh" target="_blank"><i class="fa fa-linkedin"></i></a>
+            <a href="https://github.com/soukaryag" target="_blank"><i class="fa fa-github"></i></a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</html>

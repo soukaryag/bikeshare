@@ -1,0 +1,74 @@
+body{
+    font-family: "Century Gothic", CenturyGothic, Geneva, AppleGothic, sans-serif;
+    font-size: 25px;
+}
+
+/* OVERLAY STYLING */
+
+.overlayTWO {
+    height: 0;
+    width: 100%;
+    position: fixed;
+    z-index: 1;
+    bottom: 0;
+    left: 0;
+    background-color: rgba(244, 243, 240,0.9);
+    overflow-x: hidden;
+    transition: 0.5s;
+}
+
+.overlayTWO-content {
+    position: relative;
+    top: 25%;
+    width: 100%;
+    text-align: center;
+    margin-top: 30px;
+}
+
+.overlayTWO a {
+    padding: 8px;
+    text-decoration: none;
+    font-size: 36px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.overlayTWO a:hover, .overlayTWO a:focus {
+    color: #f1f1f1;
+}
+
+.overlayTWO .closebtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 40px;
+}
+
+@media screen and (max-height: 450px) {
+  .overlayTWO a {font-size: 20px}
+  .overlayTWO .closebtn {
+    font-size: 40px;
+    top: 15px;
+    right: 35px;
+  }
+}
+
+i {
+    border: solid black;
+    width: 20px;
+    height: 20px;
+    border-width: 0 4px 4px 0;
+    display: inline-block;
+    padding: 3px;
+}
+
+.up {
+    transform: rotate(-135deg);
+    -webkit-transform: rotate(-135deg);
+}
+
+i:hover{
+    border: solid #74b9ff;
+    cursor: pointer;
+}

@@ -1,0 +1,421 @@
+<!-- This is the base and main file that displays the website and the map.
+     Also houses the script that runs all the dynamics on the map ------>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{{ url_for('static', filename='image/tabLogo.png') }}">
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ url_for('static', filename='css/style2.css') }}">
+
+    <title>{{pageName}}</title>
+
+    <script>
+
+            function openNavOne() {
+              document.getElementById("myNav").style.width = "25%";
+            }
+
+            function closeNavOne() {
+              document.getElementById("myNav").style.width = "0%";
+            }
+
+
+    </script>
+
+
+    <nav class='navbar'>
+        <ul id="myNav" class="overlay">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNavOne()">&times;</a>
+            <div class="overlay-content">
+                <a href="/">Home</a>
+                <a href="/stats">Statistics</a>
+                <a href="/graphs">Graphs</a>
+                <a href="https://github.com/soukaryag" target="_blank">Repo</a>
+                <a href="/aboutme">About Me</a>
+            </div>
+        </ul>
+
+        <ul class="left">
+            <li><a onclick="openNavOne()" style="font-size: 150%">&#9776;</a></li>
+        </ul>
+
+
+        <ul class="right">
+            <li><a href="https://github.com/soukaryag" target="_blank" style="font-size: 150%">github repo</a></li>
+        </ul>
+    </nav>
+
+</head>
+
+<!-- TELL THE BODY TO CALL THE SCRIPTED FUNCTION AND PASS IT TO INDEX.HTML -->
+<body>
+<title>
+    Los Angeles Bike Share Graphics Page
+</title>
+
+
+<!-- ADDING TEXT TO THE BODY AND ADDING THE ACTUAL FRAME OF THE MAP THAT WAS SCRIPTED IN LAYOUT.HTML -->
+<link rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style2.css') }}">
+
+<div style="background-image: url('static/image/skyline.jpg');
+                    background-size: 100%;
+                    min-height: 500px;
+                    background-repeat: no-repeat;
+                    background-attachment: fixed;
+                    font: 70px 'Century Gothic';">
+    <a style="display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  text-align: center;
+                  line-height: 500px;
+                  margin-left:10%;
+                  color:white;
+                  ">Bike Share Visuals</a>
+    <a style="display: flex;
+                  align-items: center;
+                  justify-content: center;
+                  font-size: 20px;
+                  text-align: center;
+                  color:white;"> Click Arrow to View </a>
+</div>
+
+
+<script>
+            function openNav() {
+              document.getElementById("myNavTwo").style.height = "60%";
+            }
+
+            function closeNav() {
+              document.getElementById("myNavTwo").style.height = "0%";
+            }
+
+
+</script>
+
+<link rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/styleStat.css') }}">
+
+<ul id="myNavTwo" class="overlayTWO">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+    <div class="overlayTWO-content">
+        <link rel="stylesheet"
+              type="text/css"
+              href="{{ url_for('static', filename='css/flip-card.css') }}">
+        <div class="flip-card" style="width: 550px;
+                            height: 350px;
+                            position: absolute;
+                            top:-200px;
+                            right:50%;
+                            padding: 25px;
+                            margin: 25px;">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <br>
+                    <a style="color:black; font-size: 45px">Passholder</a>
+                    <b style="font-size: 60px; color:#5383d3">Usage</b>
+                    <a style="color:black; font-size: 45px">Chart</a>
+                    <a style="font-size: 10px;">hover to flip</a>
+                </div>
+                <div class="flip-card-back">
+                    <div id="piechartPH"></div>
+
+                    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+                    <script type="text/javascript">
+                    // Load google charts
+                    google.charts.load('current', {'packages':['corechart']});
+                    google.charts.setOnLoadCallback(drawChart);
+
+                    // Draw the chart and set the chart values
+                    function drawChart() {
+                      var data = google.visualization.arrayToDataTable([
+                      ['Passholder Type', 'Amount'],
+                      ['Walk-up', {{pieArrPH[0]}}],
+                      ['Flex Pass', {{pieArrPH[1]}}],
+                      ['Monthly Pass', {{pieArrPH[2]}}],
+                      ['Staff Annual', {{pieArrPH[3]}}]
+                    ]);
+
+                      // Optional; add a title and set the width and height of the chart
+                      var options = {'title':'Passholder Distribution', 'width':550, 'height':350};
+
+                      // Display the chart inside the <div> element with id="piechartPH"
+                      var chart = new google.visualization.PieChart(document.getElementById('piechartPH'));
+                      chart.draw(data, options);
+                    }
+
+
+
+
+
+
+
+
+                    </script>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="flip-card" style="width: 550px;
+                            height: 350px;
+                            position: absolute;
+                            top:-200px;
+                            left:50%;
+                            padding: 25px;
+                            margin: 25px;">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <br>
+                    <a style="color:black; font-size: 45px">Trip</a>
+                    <b style="font-size: 60px; color:#5383d3">Route</b>
+                    <a style="color:black; font-size: 45px">Chart</a>
+                    <a style="font-size: 10px;">hover to flip</a>
+                </div>
+                <div class="flip-card-back">
+
+                    <div id="piechartTR"></div>
+
+                    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+
+                    <script type="text/javascript">
+                    // Load google charts
+                    google.charts.load('current', {'packages':['corechart']});
+                    google.charts.setOnLoadCallback(drawChartTR);
+
+                    // Draw the chart and set the chart values
+                    function drawChartTR() {
+                      var data = google.visualization.arrayToDataTable([
+                      ['Trip Route', 'Amount'],
+                      ['One Way', {{pieArrTR[0]}}],
+                      ['Round Trip', {{pieArrTR[1]}}]
+                    ]);
+
+                      // Optional; add a title and set the width and height of the chart
+                      var options = {'title':'Trip Route Distribution', 'width':550, 'height':350};
+
+                      // Display the chart inside the <div> element with id="piechartTR"
+                      var chart = new google.visualization.PieChart(document.getElementById('piechartTR'));
+                      chart.draw(data, options);
+                    }
+
+
+
+
+
+
+
+                    </script>
+
+                </div>
+            </div>
+        </div>
+
+
+        <!-- THIRD GRAPH -->
+        <div class="flip-card" style="width: 1000px;
+                            height: 400px;
+                            position: absolute;
+                            top:300px;
+                            left: 14%;
+                            padding: 25px;
+                            margin: 25px;">
+            <div class="flip-card-inner">
+                <div class="flip-card-front">
+                    <br>
+                    <a style="color:black; font-size: 45px">Bike Share</a>
+                    <b style="font-size: 60px; color:#5383d3">Usage</b>
+                    <a style="color:black; font-size: 45px">Chart</a>
+                    <a style="font-size: 10px;">hover to flip</a>
+                </div>
+                <div class="flip-card-back">
+                    <div id="curve_chart" style="width: 1000px; height: 400px"></div>
+
+                    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+                    <script type="text/javascript">
+
+                      google.charts.load('current', {'packages':['corechart']});
+                      google.charts.setOnLoadCallback(drawChart);
+
+                      function drawChart() {
+                        var data = google.visualization.arrayToDataTable([
+                          ['Month', 'Users', 'Average Temperature'],
+                          ['July',  {{line[7]}}, 84],
+                          ['August',  {{line[8]}}, 78],
+                          ['September',  {{line[9]}}, 87],
+                          ['October',  {{line[10]}}, 78],
+                          ['November',  {{line[11]}}, 79],
+                          ['December',  {{line[12]}}, 69],
+                          ['January',  {{line[1]}}, 67],
+                          ['February',  {{line[2]}}, 67],
+                          ['March',  {{line[3]}}, 72]
+                        ]);
+
+
+
+                        var options = {
+                          title: 'Rider Usage and Avg Temperature by Month',
+                          curveType: 'function',
+                          hAxis: {showTextEvery: 1},
+                          vAxes: {0: {title: "Users",
+                                      viewWindowMode:'explicit',
+                                      viewWindow:{
+                                                  max:30000,
+                                                  min:0
+                                                  },
+                                      gridlines: {color: 'transparent'},
+                                      },
+                                  1: {title: "Avg Temp (F)",
+                                      gridlines: {color: 'transparent'},
+                                      format:"#",
+                                      viewWindow:{
+                                                  max:90,
+                                                  min:60
+                                                  }},
+                                  },
+                          series: {0: {targetAxisIndex:0},
+                                   1:{targetAxisIndex:1},
+                                  },
+                          colors: ["green", "orange"],
+                          legend: { position: 'bottom' }
+                        };
+
+                        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+                        chart.draw(data, options);
+                      }
+
+
+
+
+
+
+
+                    </script>
+
+                </div>
+            </div>
+        </div>
+
+    </div>
+</ul>
+
+<ul style="text-align: center">
+    <li><a onclick="openNav()"><i class="arrow up"></i></a></li>
+</ul>
+
+
+<div>
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ url_for('static', filename='css/aboutme.css') }}">
+
+    <section class="questions-section">
+        <h1 style="font-size:40px">Graphs</h1>
+        <h2>Passholder Usage Chart</h2>
+        <p>This pie chart shows the usage by customers identifying under each of the passholder subsections.
+            The four subsections of interest are Walk-up, Flex Pass, Monthly Pass, and Staff Annual. The usage
+            percentages
+            are derived from aggregating the total entries under each subsection in the dataset. Since it is a direct
+            count of usage in each category over the 266 day period, it more accurately represents which categories
+            rely more on the system rather than which categories houses more people, since this does not factor in
+            repeat
+            customers, which can be hard to do for non-regulars (Walk-in) customers.</p>
+        <h2>Trip Route Chart</h2>
+        <p>This pie chart, seemingly simple, gives a large insight into a lurking problem in the Bike Share industry.
+            The over saturation of users that are in it for a One-Way trip creates an issue of redistribution of bikes.
+            A bike that may start at the residential part of the city, may end up elsewhere. If enough bikes get
+            redistributed, it may effect business negatively and deter users from future usages.</p> <br>
+        <p>Since the percentage of Round-Trip users is so low, and it is more beneficial to the Bike Share program to
+            have customers bring back
+            bikes to starting locations, an incentive can implemented to persuade users with an inelastic demand for
+            Round-Trips. However, this creates the problem of users holding on to the bike for a longer amount of time,
+            which may be solved with more bikes being deployed, but this bring total cost to the business up. There are
+            many trade-offs to be considered here, given more time, a more thorough model could be built analyzing this
+            very interesting proposition.</p>
+        <h2>Monthly Usage vs. Temperature</h2>
+        <p>This graph shows the total number of trips by month. The upper bound seems to be around 25,000 rides per
+            month, while the lower bound bottoms out around 10,000 rides per month. The interesting aspect of this is
+            that how well it is tracing the average temperature in Los Angeles by Month. Although only a correlation,
+            it gives some insight on the activity levels in Los Angeles as the seasons progress. There is a clear dip
+            in Bike Share usage in the months of December and January when the weather gets cold relative to the Summer
+            and Fall months.</p> <br>
+        <p>Furthermore, this correlation may be attributed to various other factors like winter break for students,
+            or the holidays and generally lesser outdoor activities in the winter.</p>
+        <p><a style="color: grey">(data source: https://www.wunderground.com/history/monthly/us/ca/
+            los-angeles-downtown/KCQT)</a></p>
+    </section>
+
+</div>
+
+
+</body>
+
+
+<footer class="footer-distributed">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div class="footer-left">
+
+        <h3>Bike Share<span>Data</span></h3>
+
+        <p class="footer-links">
+            <a href="/">Home</a>
+            ·
+            <a href="/stats">Statistics</a>
+            ·
+            <a href="/graphs">Graphs</a>
+            ·
+            <a href="/aboutme">About Me</a>
+
+        </p>
+
+        <p class="footer-company-name">Soukarya Ghosh | B.S. Computer Science · B.A. Mathematics</p>
+    </div>
+
+    <div class="footer-center">
+
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>University of Virginia</span> Charlottesville, Virginia</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+1 571-337-7193</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:sg4fz@virginia.edu">sg4fz@virginia.edu</a></p>
+        </div>
+
+    </div>
+
+    <div class="footer-right">
+
+        <p class="footer-company-about">
+            <span>About the project</span>
+            Aggregation of user data from the Los Angeles Metro bikeshare business. Using data techniques to
+            determine various correlations and statistics.
+        </p>
+
+        <div class="footer-icons">
+            <a href="https://www.facebook.com/soukarya.ghosh.3" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://twitter.com/soukarya_g" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/in/soukaryaghosh" target="_blank"><i class="fa fa-linkedin"></i></a>
+            <a href="https://github.com/soukaryag" target="_blank"><i class="fa fa-github"></i></a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+</html>

@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+
+{% block content %}
+
+    <script type="text/javascript">
+        function initMap(){
+            //------------------------ CREATE THE STRING AND INFOWINDOW THAT DISPLAYS HOVER OVER INFORMATION -----------
+            var contentString = ''
+            var infowindow = new google.maps.InfoWindow({
+              content: contentString,
+              position: {lat: 34.037421, lng: -118.299548}
+            });
+
+            //------------------------ CREATION OF THE MAP OF LOS ANGELES USING GOOGLE API -----------------------------
+            var myLatLng = {lat: {{city.lat}}, lng: {{city.lng}}};
+            var map = new google.maps.Map(document.getElementById('map'), {
+              zoom: {{city.scale}},
+              center: myLatLng
+            });
+
+            //------------------------ ADDITION OF ALL THE MARKING SPOTS OF THE BIKE SHARE HUBS ------------------------
+            var placeNames = {{ locNameConv|tojson }};
+
+            var temp = document.getElementById("myRange").valueAsNumber;
+
+            for(var i = 0; i < {{loc}}.length; i++){
+                var cityCircle = new google.maps.Circle({
+                    number: {{locName}}[i],
+                    title: placeNames[{{locName}}[i]],
+                    strokeOpacity: 0,
+                    strokeWeight: 2,
+                    fillColor: '#000000',
+                    fillOpacity: 0.3,
+                    map: map,
+                    center: {lat: {{loc}}[i][0][0], lng: {{loc}}[i][0][1]},
+                    radius: ({{loc}}[i][1])/temp,
+                    rad: ({{loc}}[i][1])/temp,
+                    usage: {{loc}}[i][1]
+                });
+                setMouseOverEvent(cityCircle);
+            }
+
+            //------------------------ THE HOVER OVER ACTION EVENT INITIALIZED AND DEFINED -----------------------------
+            function setMouseOverEvent(cityCircle) {
+                google.maps.event.addListener(cityCircle, 'mouseover', function(e) {
+                  this.setOptions({
+                    fillColor: "#00CC00",
+                    radius: this.rad * 2
+                  });
+                  infowindow.setContent('<div><b>' + this.title + '</b><br>' +
+                    'Station #' + this.number + '<br>'+
+                    'Recorded Usage: ' + this.usage + ' rides<br></div>');
+                  infowindow.setPosition(this.center);
+                  infowindow.open(map);
+                });
+                google.maps.event.addListener(cityCircle, 'mouseout', function(e) {
+                  this.setOptions({
+                    fillColor: "#000000",
+                    radius: this.rad
+                  });
+                  infowindow.close();
+                });
+            }
+        }
+        </script>
+
+{% endblock %}

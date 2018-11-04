@@ -1,0 +1,202 @@
+<!-- This is the base and main file that displays the website and the map.
+     Also houses the script that runs all the dynamics on the map ------>
+
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="{{ url_for('static', filename='image/tabLogo.png') }}">
+    <link rel="stylesheet"
+          type="text/css"
+          href="{{ url_for('static', filename='css/style2.css') }}">
+
+    <title>{{mapName}}</title>
+
+    <!-- INITIALIZE THE API FOR GOOGLE MAPS -->
+    <script type="text/javascript"
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDBtyxrWGNuR-AclA7hUszqAoqX--PpyXo&callback=initMap"></script>
+
+    <!-- MAIN SCRIPT ALLOWING FOR INTERACTION WITH THE MAP, SPLIT INTO HEAT AND POINTER-->
+    {% block content %}
+    {% endblock %}
+
+
+    <!-- CREATION OF THE TOP RIBBON CONTAINING NAVIGATION OPTIONS -->
+
+    <script>
+
+            function openNav() {
+              document.getElementById("myNav").style.width = "25%";
+            }
+
+            function closeNav() {
+              document.getElementById("myNav").style.width = "0%";
+            }
+
+
+    </script>
+
+
+    <nav class='navbar'>
+        <ul id="myNav" class="overlay">
+            <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+            <div class="overlay-content">
+                <a href="/">Home</a>
+                <a href="/stats">Statistics</a>
+                <a href="/graphs">Graphs</a>
+                <a href="https://github.com/soukaryag" target="_blank">Repo</a>
+                <a href="/aboutme">About Me</a>
+            </div>
+        </ul>
+
+        <ul class="left">
+            <li><a onclick="openNav()">&#9776;</a></li>
+        </ul>
+
+
+        <ul class="right">
+            <li><a href="https://github.com/soukaryag" target="_blank">github repo</a></li>
+        </ul>
+    </nav>
+
+</head>
+
+<!-- TELL THE BODY TO CALL THE SCRIPTED FUNCTION AND PASS IT TO INDEX.HTML -->
+<body onload="initMap()">
+<title>
+    Los Angeles Bike Share
+</title>
+
+<!-- ADDING TEXT TO THE BODY AND ADDING THE ACTUAL FRAME OF THE MAP THAT WAS SCRIPTED IN LAYOUT.HTML -->
+<link rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='css/style2.css') }}">
+
+<div style="background-image: url('static/image/losAngeles.jpg');
+                    background-size: 120%;
+                    min-height: 500px;
+
+                    background-repeat: no-repeat;
+                    background-attachment: fixed;
+                    font: 70px 'Century Gothic';">
+    <a style="display: flex;
+                  color: white;
+                  align-items: center;
+                  justify-content: center;
+                  text-align: center;
+                  line-height: 500px;
+                    margin-left:8%;">Los Angeles Bike Share</a>
+</div>
+
+<script>
+            function myFunction() {
+                document.getElementById("myDropdown").classList.toggle("show");
+            }
+
+            // Close the dropdown menu if the user clicks outside of it
+            window.onclick = function(event) {
+              if (!event.target.matches('.dropbtn')) {
+
+                var dropdowns = document.getElementsByClassName("dropdown-content");
+                var i;
+                for (i = 0; i < dropdowns.length; i++) {
+                  var openDropdown = dropdowns[i];
+                  if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                  }
+                }
+              }
+            }
+
+
+</script>
+
+<div style="width:100%" id="mp">
+    <div class="dropdown">
+
+        <button onclick="myFunction()" class="dropbtn">Modify Mode</button>
+
+        <div id="myDropdown" class="dropdown-content">
+            <a href="/#mp">Locations</a>
+            <a href="/start_heat#mp">Starting Station Heat Map</a>
+            <a href="/stop_heat#mp">Stoping Station Heat Map</a>
+        </div>
+
+    </div>
+
+    <input type="range" min="1" max="30" value="15" class="slider" id="myRange" , onchange="initMap()">
+
+    <h1 class="middle">{{mapName}}</h1>
+
+</div>
+
+<div class="container">
+    <div id="map" style="width:100%; height:650px;"></div>
+</div>
+
+
+</body>
+
+
+<footer class="footer-distributed">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <div class="footer-left">
+
+        <h3>Bike Share<span>Data</span></h3>
+
+        <p class="footer-links">
+            <a href="/">Home</a>
+            ·
+            <a href="/stats">Statistics</a>
+            ·
+            <a href="/graphs">Graphs</a>
+            ·
+            <a href="/aboutme">About Me</a>
+
+        </p>
+
+        <p class="footer-company-name">Soukarya Ghosh | B.S. Computer Science · B.A. Mathematics</p>
+    </div>
+
+    <div class="footer-center">
+
+        <div>
+            <i class="fa fa-map-marker"></i>
+            <p><span>University of Virginia</span> Charlottesville, Virginia</p>
+        </div>
+
+        <div>
+            <i class="fa fa-phone"></i>
+            <p>+1 571-337-7193</p>
+        </div>
+
+        <div>
+            <i class="fa fa-envelope"></i>
+            <p><a href="mailto:sg4fz@virginia.edu">sg4fz@virginia.edu</a></p>
+        </div>
+
+    </div>
+
+    <div class="footer-right">
+
+        <p class="footer-company-about">
+            <span>About the project</span>
+            Aggregation of user data from the Los Angeles Metro bikeshare business. Using data techniques to
+            determine various correlations and statistics.
+        </p>
+
+        <div class="footer-icons">
+            <a href="https://www.facebook.com/soukarya.ghosh.3" target="_blank"><i class="fa fa-facebook"></i></a>
+            <a href="https://twitter.com/soukarya_g" target="_blank"><i class="fa fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/in/soukaryaghosh" target="_blank"><i class="fa fa-linkedin"></i></a>
+            <a href="https://github.com/soukaryag" target="_blank"><i class="fa fa-github"></i></a>
+
+        </div>
+
+    </div>
+
+</footer>
+
+
+</html>
