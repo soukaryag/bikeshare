@@ -1,5 +1,5 @@
 ## PROPERTY OF SOUKARYA GHOSH ##
-
+## MAIN FILE FOR THE PROGRAM, CALLS ALL MAJOR METHODS AND INITIATES THE FLASK APP WHILE CALLING HTML FILES ##
 
 from flask import Flask
 from flask import Blueprint, render_template
