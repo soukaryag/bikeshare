@@ -6,7 +6,7 @@ This app was built using the Python Flask library in conjunction with html5, css
 The app is deployed using Heroku, and can be visited here:
 <a>https://bikeshare-data.herokuapp.com/</a>
 
-*Please keep in mind that this is on a free server, so long load times and potential crahses with too much load*
+*Please keep in mind that this is on a free server, so long load times and potential crahses with too much load are to be expected*
 
 <b>Home</b>
 
