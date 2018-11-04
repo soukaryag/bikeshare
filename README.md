@@ -4,7 +4,8 @@ Welcome to my webapp for the Los Angeles Bike Share program.
 This app is meant to inform you about various usage statistics within the Bike Share business.
 This app was built using the Python Flask library in conjunction with html5, css, and javascript.
 The app is deployed using Heroku, and can be visited here:
-<a href="https://bikeshare-data.herokuapp.com/">https://bikeshare-data.herokuapp.com/</a>
+<a>https://bikeshare-data.herokuapp.com/</a>
+
 *Please keep in mind that this is on a free server, so long load times and potential crahses with too much load*
 
 <b>Home</b>
