@@ -57,41 +57,41 @@ locNameConv = {3005: '7th & Flower', 3006: 'Olive & 8th', 3007: '5th & Grand', 3
                4267: '28th & University', 4273: 'Hoover & 32nd', 4222: 'Venice: Artists & Fleas'}
 
 
-##FIND the most popular end station
-# popEndStation = [[[[], 0], ""], [[[], 0], ""], [[[], 0], ""], [[[], 0], ""]]  # initialized with placeholders
-# for entry in range(0, len(loc)):
-#     tracker = -1  # variable to tell which index of popEndStation to replace
-#     possibleInserts = 0
-#     for check in range(0, 4):
-#         if (popEndStation[check][0][1] < loc[entry][1]):
-#             if tracker == -1:
-#                 tracker = check
-#             else:
-#                 if popEndStation[check][0][1] < popEndStation[tracker][0][1]:
-#                     tracker = check
-#     if tracker != -1:
-#         tempEnd = []
-#         tempEnd.append(loc[entry])
-#         tempEnd.append(locNameConv[locName[entry]])
-#         popEndStation[tracker] = tempEnd
-#
-# ##FIND the most popular start station
-# popStartStation = [[[[], 0], ""], [[[], 0], ""], [[[], 0], ""], [[[], 0], ""]]  # initialized with placeholders
-# for entry in range(0, len(locS)):
-#     tracker = -1  # variable to tell which index of popEndStation to replace
-#     possibleInserts = 0
-#     for check in range(0, 4):
-#         if (popStartStation[check][0][1] < locS[entry][1]):
-#             if tracker == -1:
-#                 tracker = check
-#             else:
-#                 if popStartStation[check][0][1] < popStartStation[tracker][0][1]:
-#                     tracker = check
-#     if tracker != -1:
-#         tempStart = []
-#         tempStart.append(locS[entry])
-#         tempStart.append(locNameConv[locName[entry]])
-#         popStartStation[tracker] = tempStart
+#FIND the most popular end station
+popEndStation = [[[[], 0], ""], [[[], 0], ""], [[[], 0], ""], [[[], 0], ""]]  # initialized with placeholders
+for entry in range(0, len(loc)):
+    tracker = -1  # variable to tell which index of popEndStation to replace
+    possibleInserts = 0
+    for check in range(0, 4):
+        if (popEndStation[check][0][1] < loc[entry][1]):
+            if tracker == -1:
+                tracker = check
+            else:
+                if popEndStation[check][0][1] < popEndStation[tracker][0][1]:
+                    tracker = check
+    if tracker != -1:
+        tempEnd = []
+        tempEnd.append(loc[entry])
+        tempEnd.append(locNameConv[locName[entry]])
+        popEndStation[tracker] = tempEnd
+
+##FIND the most popular start station
+popStartStation = [[[[], 0], ""], [[[], 0], ""], [[[], 0], ""], [[[], 0], ""]]  # initialized with placeholders
+for entry in range(0, len(locS)):
+    tracker = -1  # variable to tell which index of popEndStation to replace
+    possibleInserts = 0
+    for check in range(0, 4):
+        if (popStartStation[check][0][1] < locS[entry][1]):
+            if tracker == -1:
+                tracker = check
+            else:
+                if popStartStation[check][0][1] < popStartStation[tracker][0][1]:
+                    tracker = check
+    if tracker != -1:
+        tempStart = []
+        tempStart.append(locS[entry])
+        tempStart.append(locNameConv[locName[entry]])
+        popStartStation[tracker] = tempStart
 
 
 def convertToPercentage(lst):
@@ -122,27 +122,23 @@ def scale(lst):
     return lst
 
 
-#harcoded the above functions(THIS IS DONE TO REDUCE THE RUN TIME, YOU CAN UNCOMMENT ABOVE BLOCK TO GET THE SAME RESULT)
-popStartStation = [[[[34.0485497, -118.25905], 4883], '7th & Flower'], [[[34.0508804, -118.24825], 5138], 'Broadway & 3rd'], [[[34.0519409, -118.24353], 5059], 'Main & 1st'], [[[34.0468102, -118.25698], 4661], 'Grand & 7th']]
 popStartStation = scale(convertToPercentage(popStartStation))
-popEndStation = [[[[34.0485497, -118.25905], 6262], '7th & Flower'], [[[34.0447006, -118.25243999999999], 5517], '7th & Spring'], [[[34.0566101, -118.23721], 5385], 'Union Station West Portal'], [[[34.0493011, -118.23881000000002], 5293], '1st & Central']]
 popEndStation = scale(convertToPercentage(popEndStation))
 
 
-regRiders = 91203//182 #pcsv.getRegularRiders()   #182 workdays #84 holidays/weekend days
+regRiders = pcsv.getRegularRiders()   #182 workdays #84 holidays/weekend days
 
-avgDist, avgTime = (3.372301022816902, 1149.4307187502636) #pcsv.avgDistance()
+avgDist, avgTime = pcsv.avgDistance()
 avgTime = round((avgTime/60),2)
-avgDist = round(avgDist,2)
+avgDist = round(avgDist, 2)
 
 avgSpeed = round((avgDist / (avgTime/60)), 1)  #avg speed in miles/hour
 
-pieArrPH = [41224, 9517, 81304, 382] #pcsv.pieChartPassHolder()
+pieArrPH = pcsv.pieChartPassHolder()
 
-pieArrTR = [119642, 12785] #pcsv.pieChartTripRoute()
+pieArrTR = pcsv.pieChartTripRoute()
 
-#line = pcsv.lineByMonth()
-line = {7: 11420, 8: 24153, 9: 19866, 10: 18159, 11: 14430, 12: 10613, 1: 10347, 2: 9533, 3: 13906, 4: 0, 5: 0, 6: 0}
+line = pcsv.lineByMonth()
 
 @bp.route('/')
 def show_point():
