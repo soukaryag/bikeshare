@@ -5,7 +5,7 @@ This app is meant to inform you about various usage statistics within the Bike S
 This app was built using the Python Flask library in conjunction with html5, css, and javascript.
 There is also an extensive use of the Pandas and Numpy libraries for Python for data analysis.
 The app is deployed using Heroku, and can be visited here:
-<a>https://bikeshare-data.herokuapp.com/</a>
+<a target="_blank">https://bikeshare-data.herokuapp.com/</a>
 
 *Please keep in mind that this is on a free server, so long load times and potential crahses with too much load are to be expected*
 
