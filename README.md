@@ -9,6 +9,7 @@ The app is deployed using Heroku, and can be visited here:
 
 *Please keep in mind that this is on a free server, so long load times and potential crahses with too much load are to be expected*
 
+## The Website
 <b>Home</b>
 
 Explore the map of Los Angeles with markers specifying Bike Share locations. 
@@ -29,3 +30,14 @@ as well!
 <b>About Me</b>
 
 Visit this page to find out more about me and to reach out to me as well!
+
+## The Code
+<b>deploy.py</b>:
+This is the main file. The Flask app is initialized here with a blueprint, the html code is called for each page and the blueprint is applied to the app to create the whole of the website
+
+<b>parseCSV.py</b>:
+This python file is heavily based around the Pandas library, using it parse and return the data of interest. This file houses the various methods that are called in deploy.py asking for certain types of data (i.e. average distance, regular riders, etc.)
+
+<b>retLocations.py</b>
+This file coverts all locations from the csv into a JSON structure and returns it to deploy.py for ease of use.
+
